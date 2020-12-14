@@ -51,12 +51,26 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
   
   const panes = [
     {
-      menuItem: `Non-Masterworked Oven (${result?.nomasterwork.total} cookies)`,
-      render: () => result !== undefined ? <Tab.Pane attached={false} style={styles.tabPane}>{getResultTable(result.nomasterwork.items)}</Tab.Pane> : null,
+      menuItem: `No Masterwork (${result?.nomasterwork.total} cookies)`,
+      render: () => result !== undefined 
+        ? <Tab.Pane attached={false} style={styles.tabPane}>
+            <p>
+              A non-masterworked oven consumes <b>15 Essence of Dawning</b> for each cookie baked.
+            </p>
+            {getResultTable(result.nomasterwork.items)}
+          </Tab.Pane> 
+        : null,
     },
     {
-      menuItem: `Masterworked Oven (${result?.masterwork.total} cookies)`,
-      render: () => result !== undefined ? <Tab.Pane attached={false} style={styles.tabPane}>{getResultTable(result.masterwork.items)}</Tab.Pane> : null,
+      menuItem: `Masterworked (${result?.masterwork.total} cookies)`,
+      render: () => result !== undefined 
+        ? <Tab.Pane attached={false} style={styles.tabPane}>
+            <p>
+              A masterworked oven consumes <b>10 Essence of Dawning</b> for each cookie baked.
+            </p>
+            {getResultTable(result.masterwork.items)}
+          </Tab.Pane> 
+        : null,
     },
   ]
 
@@ -90,6 +104,7 @@ const styles = {
     backgroundColor: "#373737", 
     boxShadow: "none", 
     border: "none",
+    marginTop: -8,
   },
   tableHeader: {
     backgroundColor: "#545454", 

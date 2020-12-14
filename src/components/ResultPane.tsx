@@ -70,13 +70,17 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
           <Button content='Bake It!' primary floated="right" loading={loading} onClick={onBakeItClickHandler} />
         </Grid.Column>
       </Grid>
-      <Segment style={{backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px"}}>
-        {
-          result !== undefined
-            ? <Tab menu={{ secondary: true, pointing: true }} panes={panes} style={{color: "white !important"}}/>
-            : ""
-        }
-      </Segment>
+      {
+        result !== undefined
+          ? <Segment style={{backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px"}}>
+              {
+                result.nomasterwork.total === 0 && result.masterwork.total === 0
+                  ? "You don't have enough ingredients to bake any cookies."
+                  : <Tab menu={{ secondary: true, pointing: true }} panes={panes} style={{color: "white !important"}}/>
+              }
+            </Segment>
+          : null
+      }
     </Container>
   );
 }

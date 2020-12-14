@@ -5,9 +5,10 @@ import IngredientCell, { Ingredient } from './IngredientCell';
 interface Props {
   title: string,
   ingredients: Ingredient[],
+  topLevel?: boolean,
 }
 
-const IngredientGrid: React.FC<Props> = ({title, ingredients}) => {
+const IngredientGrid: React.FC<Props> = ({title, ingredients, topLevel}) => {
   let rows = ingredients.map((ingredient: Ingredient) => {
     return(
       <Grid.Row>
@@ -20,7 +21,7 @@ const IngredientGrid: React.FC<Props> = ({title, ingredients}) => {
 
   return (
     <Container fluid style={{marginBottom: 16}}>
-      <Header>{title}</Header>
+      <Header style={{marginBottom: topLevel ? 30 : 16}}>{title}</Header>
       <Grid.Column>
         {rows}
       </Grid.Column>

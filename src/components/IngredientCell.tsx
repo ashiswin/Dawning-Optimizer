@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Segment, Image, Input, InputOnChangeData } from 'semantic-ui-react';
+import { Grid, Segment, Image, Input } from 'semantic-ui-react';
 
 export interface Ingredient {
   name: string,
@@ -9,7 +9,7 @@ export interface Ingredient {
 
 interface Props {
   ingredient: Ingredient,
-  onChange?: ((event: React.ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => void),
+  onChange: ((name: string, quantity: string) => void),
 }
 
 const IngredientCell: React.FC<Props> = ({ ingredient, onChange }) => {
@@ -24,7 +24,7 @@ const IngredientCell: React.FC<Props> = ({ ingredient, onChange }) => {
           <p style={{marginTop: -8}}>{ingredient.description}</p>
         </Grid.Column>
         <Grid.Column width={4}>
-          <Input placeholder='Amount' type="number" onChange={onChange} fluid />
+          <Input placeholder='0' type="number" onChange={(event, data) => {onChange(ingredient.name, data.value)}} fluid />
         </Grid.Column>
       </Grid>
     </Segment>

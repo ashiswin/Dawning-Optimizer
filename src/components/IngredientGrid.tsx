@@ -6,14 +6,17 @@ interface Props {
   title: string,
   ingredients: Ingredient[],
   topLevel?: boolean,
+  onChange: ((name: string, quantity: string) => void),
 }
 
-const IngredientGrid: React.FC<Props> = ({title, ingredients, topLevel}) => {
+const IngredientGrid: React.FC<Props> = ({title, ingredients, topLevel, onChange}) => {
   let rows = ingredients.map((ingredient: Ingredient) => {
     return(
-      <Grid.Row>
+      <Grid.Row
+        key={ingredient.name}>
         <IngredientCell
           ingredient={ingredient}
+          onChange={onChange}
         />
       </Grid.Row>
     )

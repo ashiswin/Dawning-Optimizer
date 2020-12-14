@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Container, Grid } from 'semantic-ui-react';
 import IngredientGrid from './components/IngredientGrid';
 import { Ingredients } from './providers/IngredientProvider';
 import ResultPane from './components/ResultPane';
 
+interface Quantity {
+  [index: string]: string,
+}
+
 function App() {
+  const [quantities, setQuantities] = useState<Quantity>({});
+
+  const onQuantityChangeHandler = (name: string, quantity: string) => {
+    let newQuantity: {[index: string]: string} = {};
+    newQuantity[name] = quantity;
+    setQuantities({...quantities, ...newQuantity});
+  }
+
   return (
     <>
       <Container fluid style={{ margin: "0 !important", paddingTop: 16, paddingLeft: 24, paddingRight: 24, paddingBottom: 16 }} className="surface">
@@ -16,14 +28,14 @@ function App() {
       </Container>
       <Grid columns="3" stackable divided style={{ margin: 0, padding: 8 }} className="surface">
         <Grid.Column>
-          <IngredientGrid title="Combatant Ingredients" ingredients={Ingredients.combatant} topLevel />
-          <IngredientGrid title="Dawning Essence" ingredients={Ingredients.essence} />
+          <IngredientGrid title="Combatant Ingredients" ingredients={Ingredients.combatant} onChange={onQuantityChangeHandler} topLevel />
+          <IngredientGrid title="Dawning Essence" ingredients={Ingredients.essence} onChange={onQuantityChangeHandler} />
         </Grid.Column>
         <Grid.Column>
-          <IngredientGrid title="Kill-style Ingredients" ingredients={Ingredients.killstyle} topLevel />
+          <IngredientGrid title="Kill-style Ingredients" ingredients={Ingredients.killstyle} onChange={onQuantityChangeHandler} topLevel />
         </Grid.Column>
         <Grid.Column>
-          <ResultPane text="" />
+          <ResultPane text={JSON.stringify(quantities)} />
         </Grid.Column>
       </Grid>
     </>

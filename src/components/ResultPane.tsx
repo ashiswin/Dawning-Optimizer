@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container, Grid, Header, Segment } from 'semantic-ui-react';
 
 interface Props {
@@ -6,6 +6,9 @@ interface Props {
 }
 
 const ResultPane: React.FC<Props> = ({text}) => {
+  const [output, setOutput] = useState(text);
+  useEffect(() => { setOutput(text) }, [text]);
+  
   return (
     <Container fluid style={{marginBottom: 16}}>
       <Grid columns="two">
@@ -17,7 +20,7 @@ const ResultPane: React.FC<Props> = ({text}) => {
         </Grid.Column>
       </Grid>
       <Segment style={{backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px"}}>
-        Hi
+        {output}
       </Segment>
     </Container>
   );

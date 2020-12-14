@@ -51,24 +51,32 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
   
   const panes = [
     {
-      menuItem: `No Masterwork (${result?.nomasterwork.total} cookies)`,
+      menuItem: `No Masterwork (${result?.nomasterwork.total} ${result?.nomasterwork.total === 1 ? "cookie" : "cookies"})`,
       render: () => result !== undefined 
         ? <Tab.Pane attached={false} style={styles.tabPane}>
             <p>
               A non-masterworked oven consumes <b>15 Essence of Dawning</b> for each cookie baked.
             </p>
-            {getResultTable(result.nomasterwork.items)}
+            {
+              result.nomasterwork.total === 0
+                ? <p>You don't have enough ingredients to bake any cookies.</p>
+                : getResultTable(result.nomasterwork.items)
+            }
           </Tab.Pane> 
         : null,
     },
     {
-      menuItem: `Masterworked (${result?.masterwork.total} cookies)`,
+      menuItem: `Masterworked (${result?.masterwork.total}  ${result?.masterwork.total === 1 ? "cookie" : "cookies"})`,
       render: () => result !== undefined 
         ? <Tab.Pane attached={false} style={styles.tabPane}>
             <p>
               A masterworked oven consumes <b>10 Essence of Dawning</b> for each cookie baked.
             </p>
-            {getResultTable(result.masterwork.items)}
+            {
+              result.masterwork.total === 0
+              ? <p>You don't have enough ingredients to bake any cookies.</p>
+              : getResultTable(result.masterwork.items)
+            }
           </Tab.Pane> 
         : null,
     },
@@ -87,11 +95,7 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
       {
         result !== undefined
           ? <Segment style={{backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px"}}>
-              {
-                result.nomasterwork.total === 0 && result.masterwork.total === 0
-                  ? "You don't have enough ingredients to bake any cookies."
-                  : <Tab menu={{ secondary: true, pointing: true }} panes={panes} style={{color: "white !important"}}/>
-              }
+              <Tab menu={{ secondary: true, pointing: true }} panes={panes} style={{color: "white !important"}}/>
             </Segment>
           : null
       }

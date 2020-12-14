@@ -11,3 +11,15 @@ input {
   background-color: #545454 !important;
   color: white !important;
 }
+
+.item {
+  color: white !important;
+}
+
+.active.item {
+  border-color: white !important;
+}
+
+.ui.pointing.secondary.menu {
+  border-color: #757575 !important;
+}

@@ -37,3 +37,7 @@ input, .dropdown {
 .ui.negative.message > .header {
   color: red !important;
 }
+
+.dropdown.icon {
+  background-color: #212121 !important;
+}

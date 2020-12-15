@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Container, Header, Segment, Button } from 'semantic-ui-react';
+import { Grid, Container, Header, Segment, Button, Icon } from 'semantic-ui-react';
 import { Cookies } from '../providers/CookieProvider';
 import ConstraintCell from './ConstraintCell';
 
@@ -39,6 +39,7 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
       ? JSON.parse(localStorage.getItem("constraints") ?? "[]")
       : getSunsetConstraints()
   );
+  const [visible, setVisible] = useState(false);
 
   const onDeleteHandler = (index: number) => {
     let newConstraints = [...constraints];
@@ -94,23 +95,38 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
     <Container fluid style={{ marginBottom: 16 }}>
       <Grid columns="sixteen" verticalAlign="middle">
         <Grid.Column>
-          <Header>Constraints</Header>
+          <a href="#!" onClick={() => {setVisible(!visible);}}>
+            {
+              visible
+                ? <Icon name="dropdown" size="large" />
+                : <Icon name="dropdown" rotated="counterclockwise" size="large" />
+            }
+          </a>
+        </Grid.Column>
+        <Grid.Column>
+          <a href="#!" onClick={() => {setVisible(!visible);}}>
+            <Header>Constraints</Header>
+          </a>
         </Grid.Column>
         <Grid.Column floated="right" width={12}>
           <Button content='Ignore Sunset Cookies' primary floated="right" icon="ban" onClick={onSunsetRemoveClickHandler} />
           <Button content='Clear All' floated="right" icon="delete" onClick={onClearHandler} />
         </Grid.Column>
       </Grid>
-      <Segment style={{ backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px" }}>
-        <Grid.Column>
-          {rows}
-        </Grid.Column>
-        <Button
-          content="Add Constraint"
-          icon="plus"
-          primary
-          onClick={onAddHandler} />
-      </Segment>
+      {
+        visible
+          ? <Segment style={{ backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px" }}>
+              <Grid.Column>
+                {rows}
+              </Grid.Column>
+              <Button
+                content="Add Constraint"
+                icon="plus"
+                primary
+                onClick={onAddHandler} />
+            </Segment>
+          : null
+      }
     </Container>
   );
 }

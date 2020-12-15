@@ -29,7 +29,7 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
         <Table.Row>
           <Table.Cell><Image src={Cookies[name.trim()].imageUrl} size="tiny" /></Table.Cell>
           <Table.Cell>
-            <Header>{name.trim()}</Header>
+            <Header>{name.trim()} {Cookies[name.trim()].sunset ? "(Sunset)" : ""}</Header>
             <p>{Cookies[name.trim()].description}</p>
           </Table.Cell>
           <Table.Cell>{quantity[name]}</Table.Cell>

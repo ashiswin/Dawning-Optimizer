@@ -5,6 +5,7 @@ import IngredientGrid from './components/IngredientGrid';
 import { Ingredients } from './providers/IngredientProvider';
 import ResultPane from './components/ResultPane';
 import axios from 'axios';
+import ConstraintsGrid, { Constraint } from './components/ConstraintsGrid';
 
 export interface Quantity {
   [index: string]: string,
@@ -23,6 +24,7 @@ function App() {
   const [errorIngredients, setErrorIngredients] = useState<Set<string>>();
   const [errorMessage, setErrorMessage] = useState("");
   const [errorVisible, setErrorVisible] = useState(false);
+  const [constraints, setConstraints] = useState<Constraint[]>(JSON.parse(localStorage.getItem("constraints") ?? "[]"));
 
   const onQuantityChangeHandler = (name: string, quantity: string) => {
     let newQuantity: { [index: string]: string } = {};
@@ -43,6 +45,11 @@ function App() {
     setErrorIngredients(newIngredients);
   }
 
+  const onConstraintChangeHandler = (constraints: Constraint[]) => {
+    setConstraints(constraints);
+    localStorage.setItem("constraints", JSON.stringify(constraints));
+  }
+
   useEffect(() => {
     if (errorIngredients === undefined) {
       return;
@@ -58,7 +65,7 @@ function App() {
   }, [errorIngredients])
 
   const onBakeItClickHandler = () => {
-    axios.post('https://dawning-optimizer.herokuapp.com/calculate', quantities)
+    axios.post('https://dawning-optimizer.herokuapp.com/calculate', {quantities: quantities, constraints: constraints})
       .then(function (response) {
         const items = response.data.items.map((item: [string, number]) => {
           let quantity: Quantity = {};
@@ -132,6 +139,7 @@ function App() {
             onChange={onQuantityChangeHandler}
             onError={onIngredientErrorHandler}
             onClearError={onClearErrorHandler} />
+          <ConstraintsGrid onChange={onConstraintChangeHandler} />
           <ResultPane cookieResult={cookieResult} onBakeItClick={onBakeItClickHandler} />
         </Grid.Column>
       </Grid>

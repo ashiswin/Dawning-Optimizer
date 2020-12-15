@@ -7,13 +7,19 @@ h1, h2, h3, h4, h5, .header {
   color: white !important;
 }
 
-input {
+input, .dropdown {
   background-color: #545454 !important;
   color: white !important;
 }
 
 .item {
   color: white !important;
+}
+
+.visible.menu.transition > .item {
+  color: white !important;
+  background-color: #545454 !important;
+  border-color: #424242 !important;
 }
 
 .active.item {

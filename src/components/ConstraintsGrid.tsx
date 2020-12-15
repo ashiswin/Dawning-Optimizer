@@ -22,6 +22,9 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
     let newConstraints = [...constraints];
     newConstraints.splice(index, 1);
     setConstraints(newConstraints);
+    if (onClearError !== undefined) {
+      onClearError(constraints[index].name);
+    }
     onChange(newConstraints);
   };
   const onAddHandler = () => {

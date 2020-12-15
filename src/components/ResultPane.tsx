@@ -25,12 +25,18 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
   const getResultTable = (quantities: Quantity[], total: number) => {
     const rows = quantities.map((quantity) => {
       const name = Object.keys(quantity)[0];
+      const cookie = Cookies[name.trim()];
       return (
         <Table.Row>
-          <Table.Cell><Image src={Cookies[name.trim()].imageUrl} size="tiny" /></Table.Cell>
+          <Table.Cell><Image src={cookie.imageUrl} size="tiny" /></Table.Cell>
           <Table.Cell>
-            <Header>{name.trim()} {Cookies[name.trim()].sunset ? "(Sunset)" : ""}</Header>
-            <p>{Cookies[name.trim()].description}</p>
+            <Header>{name.trim()} {cookie.sunset ? "(Sunset)" : ""}</Header>
+            <p>{cookie.description}</p>
+            {
+              cookie.sunset
+                ? <p style={{color: "red"}}>This cookie is for a vendor from vaulted content.</p>
+                : null
+            }
           </Table.Cell>
           <Table.Cell>{quantity[name]}</Table.Cell>
         </Table.Row>

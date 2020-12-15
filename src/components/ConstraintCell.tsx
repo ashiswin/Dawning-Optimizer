@@ -8,9 +8,11 @@ interface Props {
   index: number,
   onDelete: ((index: number) => void),
   onChange: ((index: number, constraint: Constraint) => void)
+  onError?: ((name: string) => void),
+  onClearError?: ((name: string) => void),
 }
 
-const ConstraintCell: React.FC<Props> = ({constraint, index, onChange, onDelete}) => {
+const ConstraintCell: React.FC<Props> = ({constraint, index, onChange, onDelete, onError, onClearError}) => {
   const cookieOptions = Object.keys(Cookies).map((value) => {return {key: value, value: value, text: `${value}${Cookies[value].sunset ? " (Sunset)" : ""}`}});
   const equalityOptions = [
     {key: "lte", value: "lte", text: "<="},
@@ -56,6 +58,19 @@ const ConstraintCell: React.FC<Props> = ({constraint, index, onChange, onDelete}
           type="number"
           defaultValue={constraint.value}
           onChange={(event, data) => {
+            if (parseInt(data.value?.toString()) < 0) {
+              if (onError !== undefined) {
+                onError(constraint.name);
+              }
+              onChange(index, {
+                ...constraint,
+                value: "0",
+              });
+              return;
+            }
+            if (onClearError !== undefined) {
+              onClearError(constraint.name);
+            }
             onChange(index, {
               ...constraint,
               value: data.value?.toString() ?? "",

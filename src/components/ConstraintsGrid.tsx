@@ -63,7 +63,9 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
     const sunsetConstraints = getSunsetConstraints();
     sunsetConstraints.forEach((constraint) => {
       for (let i = 0; i < constraints.length; i++) {
-        if (constraints[i].name === constraint.name && constraints[i].equality === constraint.equality && constraints[i].value === constraint.value) {
+        if (constraints[i].name === constraint.name 
+          && constraints[i].equality === constraint.equality 
+          && constraints[i].value === constraint.value) {
           return;
         }
       }
@@ -83,6 +85,8 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
       index={index}
       onDelete={onDeleteHandler}
       onChange={onChangeHandler}
+      onError={onError}
+      onClearError={onClearError}
       key={`${constraint.name} ${constraint.equality}`}
     />);
 

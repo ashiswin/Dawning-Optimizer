@@ -22,8 +22,8 @@ function App() {
   const [quantities, setQuantities] = useState<Quantity>(JSON.parse(localStorage.getItem("quantityState") ?? "{}"));
   const [cookieResult, setCookieResult] = useState<CookieResult>();
   const [errorIngredients, setErrorIngredients] = useState<Set<string>>();
-  const [errorMessage, setErrorMessage] = useState("");
-  const [errorVisible, setErrorVisible] = useState(false);
+  const [errorIngredientsMessage, setErrorIngredientsMessage] = useState("");
+  const [errorIngredientsVisible, setErrorIngredientsVisible] = useState(false);
   const [constraints, setConstraints] = useState<Constraint[]>(JSON.parse(localStorage.getItem("constraints") ?? "[]"));
 
   const onQuantityChangeHandler = (name: string, quantity: string) => {
@@ -56,12 +56,12 @@ function App() {
     }
 
     if (errorIngredients.size === 0) {
-      setErrorVisible(false);
+      setErrorIngredientsVisible(false);
       return;
     }
 
-    setErrorMessage(`The following ingredient${errorIngredients.size === 1 ? " has" : "s have"} negative values and will be treated as 0 during calculation:`)
-    setErrorVisible(true);
+    setErrorIngredientsMessage(`The following ingredient${errorIngredients.size === 1 ? " has" : "s have"} negative values and will be treated as 0 during calculation:`)
+    setErrorIngredientsVisible(true);
   }, [errorIngredients])
 
   const onBakeItClickHandler = () => {
@@ -113,10 +113,10 @@ function App() {
         </p>
       </div>
       {
-        errorVisible
+        errorIngredientsVisible
           ? <Container fluid style={{ margin: "0 !important", paddingTop: 16, paddingLeft: 24, paddingRight: 24, paddingBottom: 16 }} className="surface">
             <Message negative style={{ backgroundColor: "#424242" }}>
-              <Message.Header>{errorMessage}</Message.Header>
+              <Message.Header>{errorIngredientsMessage}</Message.Header>
               <ul>
                 {
                   errorIngredients !== undefined

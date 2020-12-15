@@ -19,7 +19,7 @@ interface Props {
 const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) => {
   const getSunsetConstraints = () => {
     let newConstraints = [];
-    for (const [ name, cookie ] of Object.entries(Cookies)) {
+    for (const [name, cookie] of Object.entries(Cookies)) {
       if (!cookie.sunset) {
         continue;
       }
@@ -60,12 +60,12 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
   }
   const onSunsetRemoveClickHandler = () => {
     let newConstraints = [...constraints];
-    
+
     const sunsetConstraints = getSunsetConstraints();
     sunsetConstraints.forEach((constraint) => {
       for (let i = 0; i < constraints.length; i++) {
-        if (constraints[i].name === constraint.name 
-          && constraints[i].equality === constraint.equality 
+        if (constraints[i].name === constraint.name
+          && constraints[i].equality === constraint.equality
           && constraints[i].value === constraint.value) {
           return;
         }
@@ -74,6 +74,7 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
     })
 
     setConstraints(newConstraints);
+    setVisible(true);
   }
   const onClearHandler = () => {
     setConstraints([]);
@@ -95,7 +96,7 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
     <Container fluid style={{ marginBottom: 16 }}>
       <Grid columns="sixteen" verticalAlign="middle">
         <Grid.Column>
-          <a href="#!" onClick={() => {setVisible(!visible);}}>
+          <a href="#!" onClick={() => { setVisible(!visible); }}>
             {
               visible
                 ? <Icon name="dropdown" size="large" />
@@ -104,7 +105,7 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
           </a>
         </Grid.Column>
         <Grid.Column>
-          <a href="#!" onClick={() => {setVisible(!visible);}}>
+          <a href="#!" onClick={() => { setVisible(!visible); }}>
             <Header>Constraints</Header>
           </a>
         </Grid.Column>
@@ -116,15 +117,15 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
       {
         visible
           ? <Segment style={{ backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px" }}>
-              <Grid.Column>
-                {rows}
-              </Grid.Column>
-              <Button
-                content="Add Constraint"
-                icon="plus"
-                primary
-                onClick={onAddHandler} />
-            </Segment>
+            <Grid.Column>
+              {rows}
+            </Grid.Column>
+            <Button
+              content="Add Constraint"
+              icon="plus"
+              primary
+              onClick={onAddHandler} />
+          </Segment>
           : null
       }
     </Container>

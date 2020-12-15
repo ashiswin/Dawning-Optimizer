@@ -38,6 +38,6 @@ input, .dropdown {
   color: red !important;
 }
 
-.dropdown.icon {
+a > .dropdown.icon {
   background-color: #212121 !important;
 }

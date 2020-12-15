@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Container, Grid, Header, Segment, Tab, Table } from 'semantic-ui-react';
+import { Button, Container, Grid, Header, Segment, Tab, Table, Image } from 'semantic-ui-react';
 import { CookieResult, Quantity } from '../App';
+import { Cookies } from '../providers/CookieProvider';
 
 interface Props {
   cookieResult?: CookieResult,
@@ -26,8 +27,11 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
       const name = Object.keys(quantity)[0];
       return (
         <Table.Row>
-          <Table.Cell>{name}</Table.Cell>
-          <Table.Cell>{name}</Table.Cell>
+          <Table.Cell><Image src={Cookies[name.trim()].imageUrl} size="tiny" /></Table.Cell>
+          <Table.Cell>
+            <Header>{name.trim()}</Header>
+            <p>{Cookies[name.trim()].description}</p>
+          </Table.Cell>
           <Table.Cell>{quantity[name]}</Table.Cell>
         </Table.Row>
       );
@@ -37,8 +41,7 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
       <Table celled style={{borderRadius: 0, backgroundColor: "#545454", color: "white"}}>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell style={styles.tableHeader}>Picture</Table.HeaderCell>
-            <Table.HeaderCell style={styles.tableHeader}>Name</Table.HeaderCell>
+            <Table.HeaderCell style={styles.tableHeader} colSpan={2}>Cookie</Table.HeaderCell>
             <Table.HeaderCell style={styles.tableHeader}>Quantity</Table.HeaderCell>
           </Table.Row>
         </Table.Header>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Grid, Segment, Image, Input } from 'semantic-ui-react';
+import { Grid, Segment, Image, Input, Container } from 'semantic-ui-react';
 
 export interface Ingredient {
   name: string,
   description: string,
+  source: string,
   imageUrl: string,
 }
 
@@ -26,6 +27,7 @@ const IngredientCell: React.FC<Props> = ({ ingredient, onChange, onError, onClea
         <Grid.Column width={9}>
           <h3>{ingredient.name}</h3>
           <p style={{marginTop: -8}}>{ingredient.description}</p>
+          <p><strong>Source: </strong>{ingredient.source}</p>
         </Grid.Column>
         <Grid.Column width={4}>
           <Input 

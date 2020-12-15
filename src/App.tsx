@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Container, Grid, Message } from 'semantic-ui-react';
+import { Container, Divider, Grid, Icon, Message } from 'semantic-ui-react';
 import IngredientGrid from './components/IngredientGrid';
 import { Ingredients } from './providers/IngredientProvider';
 import ResultPane from './components/ResultPane';
@@ -134,6 +134,10 @@ function App() {
           <ResultPane cookieResult={cookieResult} onBakeItClick={onBakeItClickHandler} />
         </Grid.Column>
       </Grid>
+      <Divider />
+      <Container textAlign="center" style={{color: "white", paddingBottom: 16}}>
+        Developed by <a href="https://github.com/ashiswin">ashiswin <Icon name="github" /></a>
+      </Container>
     </>
   );
 }

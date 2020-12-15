@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Segment, Image, Input, Container } from 'semantic-ui-react';
+import { Grid, Segment, Image, Input } from 'semantic-ui-react';
 
 export interface Ingredient {
   name: string,

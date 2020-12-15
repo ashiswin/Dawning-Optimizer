@@ -23,3 +23,11 @@ input {
 .ui.pointing.secondary.menu {
   border-color: #757575 !important;
 }
+
+.ui.negative.message {
+  color: red !important;
+}
+
+.ui.negative.message > .header {
+  color: red !important;
+}

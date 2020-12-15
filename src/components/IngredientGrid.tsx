@@ -7,9 +7,11 @@ interface Props {
   ingredients: Ingredient[],
   topLevel?: boolean,
   onChange: ((name: string, quantity: string) => void),
+  onError?: ((name: string) => void),
+  onClearError?: ((name: string) => void),
 }
 
-const IngredientGrid: React.FC<Props> = ({title, ingredients, topLevel, onChange}) => {
+const IngredientGrid: React.FC<Props> = ({title, ingredients, topLevel, onChange, onError, onClearError}) => {
   let rows = ingredients.map((ingredient: Ingredient) => {
     return(
       <Grid.Row
@@ -17,6 +19,8 @@ const IngredientGrid: React.FC<Props> = ({title, ingredients, topLevel, onChange
         <IngredientCell
           ingredient={ingredient}
           onChange={onChange}
+          onError={onError}
+          onClearError={onClearError}
         />
       </Grid.Row>
     )

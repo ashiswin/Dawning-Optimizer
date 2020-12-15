@@ -89,7 +89,7 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
           <Header>Result</Header>
         </Grid.Column>
         <Grid.Column floated="right">
-          <Button content='Bake It!' primary floated="right" loading={loading} onClick={onBakeItClickHandler} />
+          <Button content='Bake It!' primary floated="right" loading={loading} disabled={loading} onClick={onBakeItClickHandler} />
         </Grid.Column>
       </Grid>
       {

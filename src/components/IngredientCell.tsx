@@ -10,9 +10,11 @@ export interface Ingredient {
 interface Props {
   ingredient: Ingredient,
   onChange: ((name: string, quantity: string) => void),
+  onError?: ((name: string) => void),
+  onClearError?: ((name: string) => void),
 }
 
-const IngredientCell: React.FC<Props> = ({ ingredient, onChange }) => {
+const IngredientCell: React.FC<Props> = ({ ingredient, onChange, onError, onClearError }) => {
   const [error, setError] = useState(false);
 
   return (
@@ -29,10 +31,16 @@ const IngredientCell: React.FC<Props> = ({ ingredient, onChange }) => {
           <Input placeholder='0' type="number" error={error} onChange={(event, data) => {
             if (parseInt(data.value) < 0) {
               setError(true);
+              if (onError !== undefined) {
+                onError(ingredient.name);
+              }
               onChange(ingredient.name, "0")
             } else {
               setError(false);
-              onChange(ingredient.name, data.value)
+              if (onClearError !== undefined) {
+                onClearError(ingredient.name);
+              }
+              onChange(ingredient.name, data.value);
             }
           }} fluid />
         </Grid.Column>

@@ -17,29 +17,7 @@ interface Props {
 }
 
 const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) => {
-  const getSunsetConstraints = () => {
-    let newConstraints = [];
-    for (const [name, cookie] of Object.entries(Cookies)) {
-      if (!cookie.sunset) {
-        continue;
-      }
-      const constraint = {
-        name: name,
-        equality: "eq",
-        value: "0",
-      };
-      newConstraints.push(constraint);
-    }
-    return newConstraints;
-  }
-
-  const storedConstraints = localStorage.getItem("constraints");
-  const [constraints, setConstraints] = useState<Constraint[]>(
-    storedConstraints !== null
-      ? JSON.parse(localStorage.getItem("constraints") ?? "[]")
-      : getSunsetConstraints()
-  );
-  const [visible, setVisible] = useState(false);
+  const [constraints, setConstraints] = useState<Constraint[]>(JSON.parse(localStorage.getItem("constraints") ?? "[]"));
 
   const onDeleteHandler = (index: number) => {
     let newConstraints = [...constraints];
@@ -57,24 +35,6 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
     newConstraints.splice(index, 1, constraint);
     setConstraints(newConstraints);
     onChange(newConstraints);
-  }
-  const onSunsetRemoveClickHandler = () => {
-    let newConstraints = [...constraints];
-
-    const sunsetConstraints = getSunsetConstraints();
-    sunsetConstraints.forEach((constraint) => {
-      for (let i = 0; i < constraints.length; i++) {
-        if (constraints[i].name === constraint.name
-          && constraints[i].equality === constraint.equality
-          && constraints[i].value === constraint.value) {
-          return;
-        }
-      }
-      newConstraints.push(constraint);
-    })
-
-    setConstraints(newConstraints);
-    setVisible(true);
   }
   const onClearHandler = () => {
     setConstraints([]);
@@ -96,38 +56,22 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
     <Container fluid style={{ marginBottom: 16 }}>
       <Grid columns="sixteen" verticalAlign="middle">
         <Grid.Column>
-          <a href="#!" onClick={() => { setVisible(!visible); }}>
-            {
-              visible
-                ? <Icon name="dropdown" size="large" />
-                : <Icon name="dropdown" rotated="counterclockwise" size="large" />
-            }
-          </a>
-        </Grid.Column>
-        <Grid.Column>
-          <a href="#!" onClick={() => { setVisible(!visible); }}>
-            <Header>Constraints</Header>
-          </a>
+          <Header>Constraints</Header>
         </Grid.Column>
         <Grid.Column floated="right" width={12}>
-          <Button content='Ignore Sunset Cookies' primary floated="right" icon="ban" onClick={onSunsetRemoveClickHandler} />
           <Button content='Clear All' floated="right" icon="delete" onClick={onClearHandler} />
         </Grid.Column>
       </Grid>
-      {
-        visible
-          ? <Segment style={{ backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px" }}>
-            <Grid.Column>
-              {rows}
-            </Grid.Column>
-            <Button
-              content="Add Constraint"
-              icon="plus"
-              primary
-              onClick={onAddHandler} />
-          </Segment>
-          : null
-      }
+      <Segment style={{ backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px" }}>
+        <Grid.Column>
+          {rows}
+        </Grid.Column>
+        <Button
+          content="Add Constraint"
+          icon="plus"
+          primary
+          onClick={onAddHandler} />
+      </Segment>
     </Container>
   );
 }

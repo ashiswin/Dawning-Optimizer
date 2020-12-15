@@ -96,6 +96,12 @@ export const Cookies: {[index: string]: Cookie} = {
     sunset: false,
     imageUrl: "https://www.bungie.net/common/destiny2_content/icons/26a3ef37eeef4a9b0293a7537af2dda1.jpg",
   },
+  "Gjallardoodles": {
+    name: "Gjallardoodles",
+    description: "Deliver these explosively delicious treats to Commander Zavala in the Tower Courtyard.",
+    sunset: false,
+    imageUrl: "https://www.bungie.net/common/destiny2_content/icons/bb0069e9efc9698f366d63fdce0c6db7.jpg",
+  },
   "Hackleberry Tart": {
     name: "Hackleberry Tart",
     description: "Deliver this glitchy snack to Benedict 99-40 in the Annex.",
@@ -107,12 +113,6 @@ export const Cookies: {[index: string]: Cookie} = {
     description: "Deliver this impeccably crafted treat to Ada-1 in the Annex.",
     sunset: true,
     imageUrl: "https://www.bungie.net/common/destiny2_content/icons/ff9810abba7b40868b013eb944fa5756.jpg",
-  },
-  "Gjallardoodles": {
-    name: "Gjallardoodles",
-    description: "Deliver these explosively delicious treats to Commander Zavala in the Tower Courtyard.",
-    sunset: false,
-    imageUrl: "https://www.bungie.net/common/destiny2_content/icons/bb0069e9efc9698f366d63fdce0c6db7.jpg",
   },
   "Ill-Fortune Cookies": {
     name: "Ill-Fortune Cookies",

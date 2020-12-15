@@ -62,12 +62,19 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
     
     const sunsetConstraints = getSunsetConstraints();
     sunsetConstraints.forEach((constraint) => {
-      if (constraints.indexOf(constraint) === -1) {
-        newConstraints.push(constraint);
+      for (let i = 0; i < constraints.length; i++) {
+        if (constraints[i].name === constraint.name && constraints[i].equality === constraint.equality && constraints[i].value === constraint.value) {
+          return;
+        }
       }
+      newConstraints.push(constraint);
     })
-    
+
     setConstraints(newConstraints);
+  }
+  const onClearHandler = () => {
+    setConstraints([]);
+    onChange([]);
   }
 
   const rows = constraints.map((constraint, index) =>
@@ -81,12 +88,13 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
 
   return (
     <Container fluid style={{ marginBottom: 16 }}>
-      <Grid columns="two" verticalAlign="middle">
+      <Grid columns="sixteen" verticalAlign="middle">
         <Grid.Column>
           <Header>Constraints</Header>
         </Grid.Column>
-        <Grid.Column floated="right">
+        <Grid.Column floated="right" width={12}>
           <Button content='Ignore Sunset Cookies' primary floated="right" icon="ban" onClick={onSunsetRemoveClickHandler} />
+          <Button content='Clear All' floated="right" icon="delete" onClick={onClearHandler} />
         </Grid.Column>
       </Grid>
       <Segment style={{ backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px" }}>

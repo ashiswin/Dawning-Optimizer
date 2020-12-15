@@ -101,6 +101,9 @@ function App() {
         <p style={{ fontSize: "16px" }}>
           Simply key in the number of each ingredient you have in the textboxes below and <strong>Bake</strong> 'em all together to find out the best possible combination to make to get the most cookies possible.
         </p>
+        <p style={{color: "grey"}}>
+          (Cookies that have been sunset are excluded by default, but you can remove their constraints to include them if you so wish)
+        </p>
         <h3>Constraints</h3>
         <p style={{ fontSize: "16px" }}>
           This year, we have added the ability to add constraints to the cookie calculation. If you wish to set a minimum/maximum number of a specific cookie, simply add a constraint for that cookie!

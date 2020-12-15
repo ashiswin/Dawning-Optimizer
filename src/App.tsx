@@ -114,13 +114,6 @@ function App() {
             ingredients={Ingredients.combatant}
             onChange={onQuantityChangeHandler}
             onError={onIngredientErrorHandler}
-            onClearError={onClearErrorHandler}
-            topLevel />
-          <IngredientGrid
-            title="Dawning Essence"
-            ingredients={Ingredients.essence}
-            onChange={onQuantityChangeHandler}
-            onError={onIngredientErrorHandler}
             onClearError={onClearErrorHandler} />
         </Grid.Column>
         <Grid.Column>
@@ -129,10 +122,15 @@ function App() {
             ingredients={Ingredients.killstyle}
             onChange={onQuantityChangeHandler}
             onError={onIngredientErrorHandler}
-            onClearError={onClearErrorHandler}
-            topLevel />
+            onClearError={onClearErrorHandler} />
         </Grid.Column>
         <Grid.Column>
+          <IngredientGrid
+            title="Dawning Essence"
+            ingredients={Ingredients.essence}
+            onChange={onQuantityChangeHandler}
+            onError={onIngredientErrorHandler}
+            onClearError={onClearErrorHandler} />
           <ResultPane cookieResult={cookieResult} onBakeItClick={onBakeItClickHandler} />
         </Grid.Column>
       </Grid>

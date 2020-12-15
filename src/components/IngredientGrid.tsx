@@ -5,13 +5,12 @@ import IngredientCell, { Ingredient } from './IngredientCell';
 interface Props {
   title: string,
   ingredients: Ingredient[],
-  topLevel?: boolean,
   onChange: ((name: string, quantity: string) => void),
   onError?: ((name: string) => void),
   onClearError?: ((name: string) => void),
 }
 
-const IngredientGrid: React.FC<Props> = ({title, ingredients, topLevel, onChange, onError, onClearError}) => {
+const IngredientGrid: React.FC<Props> = ({title, ingredients, onChange, onError, onClearError}) => {
   let rows = ingredients.map((ingredient: Ingredient) => {
     return(
       <Grid.Row
@@ -28,7 +27,7 @@ const IngredientGrid: React.FC<Props> = ({title, ingredients, topLevel, onChange
 
   return (
     <Container fluid style={{marginBottom: 16}}>
-      <Header style={{marginBottom: topLevel ? 30 : 16}}>{title}</Header>
+      <Header>{title}</Header>
       <Grid.Column>
         {rows}
       </Grid.Column>

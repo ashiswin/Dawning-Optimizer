@@ -25,6 +25,9 @@ function App() {
   const [errorIngredientsMessage, setErrorIngredientsMessage] = useState("");
   const [errorIngredientsVisible, setErrorIngredientsVisible] = useState(false);
   const [constraints, setConstraints] = useState<Constraint[]>(JSON.parse(localStorage.getItem("constraints") ?? "[]"));
+  const [errorConstraints, setErrorConstraints] = useState<Set<string>>();
+  const [errorConstraintsMessage, setErrorConstraintsMessage] = useState("");
+  const [errorConstraintsVisible, setErrorConstraintsVisible] = useState(false);
 
   const onQuantityChangeHandler = (name: string, quantity: string) => {
     let newQuantity: { [index: string]: string } = {};
@@ -39,7 +42,7 @@ function App() {
     setErrorIngredients(newIngredients);
   }
 
-  const onClearErrorHandler = (name: string) => {
+  const onClearIngredientErrorHandler = (name: string) => {
     let newIngredients = new Set(errorIngredients);
     newIngredients.delete(name);
     setErrorIngredients(newIngredients);
@@ -48,6 +51,18 @@ function App() {
   const onConstraintChangeHandler = (constraints: Constraint[]) => {
     setConstraints(constraints);
     localStorage.setItem("constraints", JSON.stringify(constraints));
+  }
+
+  const onConstraintErrorHandler = (name: string) => {
+    let newConstraints = new Set(errorConstraints);
+    newConstraints.add(name);
+    setErrorConstraints(newConstraints);
+  }
+
+  const onClearConstraintErrorHandler = (name: string) => {
+    let newConstraints = new Set(errorConstraints);
+    newConstraints.delete(name);
+    setErrorConstraints(newConstraints);
   }
 
   useEffect(() => {
@@ -63,6 +78,20 @@ function App() {
     setErrorIngredientsMessage(`The following ingredient${errorIngredients.size === 1 ? " has" : "s have"} negative values and will be treated as 0 during calculation:`)
     setErrorIngredientsVisible(true);
   }, [errorIngredients])
+
+  useEffect(() => {
+    if (errorConstraints === undefined) {
+      return;
+    }
+
+    if (errorConstraints.size === 0) {
+      setErrorConstraintsVisible(false);
+      return;
+    }
+
+    setErrorConstraintsMessage(`The following constraint${errorConstraints.size === 1 ? " has" : "s have"} negative values and will be treated as 0 during calculation:`)
+    setErrorConstraintsVisible(true);
+  }, [errorConstraints])
 
   const onBakeItClickHandler = () => {
     axios.post('https://dawning-optimizer.herokuapp.com/calculate', {quantities: quantities, constraints: constraints})
@@ -120,7 +149,23 @@ function App() {
               <ul>
                 {
                   errorIngredients !== undefined
-                    ? Array.from(errorIngredients).map((value) => <li>{value}</li>)
+                    ? Array.from(errorIngredients).map((value) => <li key={value}>{value}</li>)
+                    : null
+                }
+              </ul>
+            </Message>
+          </Container>
+          : null
+      }
+      {
+        errorConstraintsVisible
+          ? <Container fluid style={{ margin: "0 !important", paddingTop: 16, paddingLeft: 24, paddingRight: 24, paddingBottom: 16 }} className="surface">
+            <Message negative style={{ backgroundColor: "#424242" }}>
+              <Message.Header>{errorConstraintsMessage}</Message.Header>
+              <ul>
+                {
+                  errorConstraints !== undefined
+                    ? Array.from(errorConstraints).map((value) => <li key={value}>{value}</li>)
                     : null
                 }
               </ul>
@@ -135,7 +180,7 @@ function App() {
             ingredients={Ingredients.combatant}
             onChange={onQuantityChangeHandler}
             onError={onIngredientErrorHandler}
-            onClearError={onClearErrorHandler} />
+            onClearError={onClearIngredientErrorHandler} />
         </Grid.Column>
         <Grid.Column>
           <IngredientGrid
@@ -143,7 +188,7 @@ function App() {
             ingredients={Ingredients.killstyle}
             onChange={onQuantityChangeHandler}
             onError={onIngredientErrorHandler}
-            onClearError={onClearErrorHandler} />
+            onClearError={onClearIngredientErrorHandler} />
         </Grid.Column>
         <Grid.Column>
           <IngredientGrid
@@ -151,8 +196,11 @@ function App() {
             ingredients={Ingredients.essence}
             onChange={onQuantityChangeHandler}
             onError={onIngredientErrorHandler}
-            onClearError={onClearErrorHandler} />
-          <ConstraintsGrid onChange={onConstraintChangeHandler} />
+            onClearError={onClearIngredientErrorHandler} />
+          <ConstraintsGrid 
+            onChange={onConstraintChangeHandler} 
+            onError={onConstraintErrorHandler} 
+            onClearError={onClearConstraintErrorHandler} />
           <ResultPane cookieResult={cookieResult} onBakeItClick={onBakeItClickHandler} />
         </Grid.Column>
       </Grid>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Input, Dropdown, Icon } from 'semantic-ui-react';
 import { Cookies } from '../providers/CookieProvider';
 import { Constraint } from './ConstraintsGrid';
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const ConstraintCell: React.FC<Props> = ({constraint, index, onChange, onDelete, onError, onClearError}) => {
+  const [error, setError] = useState(false);
   const cookieOptions = Object.keys(Cookies).map((value) => {return {key: value, value: value, text: `${value}${Cookies[value].sunset ? " (Sunset)" : ""}`}});
   const equalityOptions = [
     {key: "lte", value: "lte", text: "<="},
@@ -57,11 +58,13 @@ const ConstraintCell: React.FC<Props> = ({constraint, index, onChange, onDelete,
           placeholder='0' 
           type="number"
           defaultValue={constraint.value}
+          error={error}
           onChange={(event, data) => {
             if (parseInt(data.value?.toString()) < 0) {
               if (onError !== undefined) {
                 onError(constraint.name);
               }
+              setError(true);
               onChange(index, {
                 ...constraint,
                 value: "0",
@@ -71,6 +74,7 @@ const ConstraintCell: React.FC<Props> = ({constraint, index, onChange, onDelete,
             if (onClearError !== undefined) {
               onClearError(constraint.name);
             }
+            setError(false);
             onChange(index, {
               ...constraint,
               value: data.value?.toString() ?? "",

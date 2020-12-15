@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Container, Header, Segment, Button, Icon } from 'semantic-ui-react';
-import { Cookies } from '../providers/CookieProvider';
+import { Grid, Container, Header, Segment, Button } from 'semantic-ui-react';
 import ConstraintCell from './ConstraintCell';
 
 

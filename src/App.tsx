@@ -93,12 +93,19 @@ function App() {
 
   return (
     <>
-      <Container fluid style={{ margin: "0 !important", paddingTop: 16, paddingLeft: 24, paddingRight: 24, paddingBottom: 16 }} className="surface">
+      <div style={{ margin: "0 !important", paddingTop: 16, paddingLeft: 24, paddingRight: 24, paddingBottom: 16 }} className="surface">
         <h1>Dawning Optimizer</h1>
-        <p style={{ fontSize: "17px" }}>
-          Since Bungie did not include the ability to retrieve the amount of each Dawning ingredient you have via their API, you need to manually enter in the quantity of each material you have. The maximum number of goods you can bake with the Dawning oven will then be shown to you.
+        <p style={{ fontSize: "16px" }}>
+          Happy Dawning Guardians! In your efforts to complete the plethora of bounties and triumphs for the Dawning this year, you may be wondering how to get the most out of your hard-earned ingredients. Well you've come to the right place!
         </p>
-      </Container>
+        <p style={{ fontSize: "16px" }}>
+          Simply key in the number of each ingredient you have in the textboxes below and <strong>Bake</strong> 'em all together to find out the best possible combination to make to get the most cookies possible.
+        </p>
+        <h3>Constraints</h3>
+        <p style={{ fontSize: "16px" }}>
+          This year, we have added the ability to add constraints to the cookie calculation. If you wish to set a minimum/maximum number of a specific cookie, simply add a constraint for that cookie!
+        </p>
+      </div>
       {
         errorVisible
           ? <Container fluid style={{ margin: "0 !important", paddingTop: 16, paddingLeft: 24, paddingRight: 24, paddingBottom: 16 }} className="surface">

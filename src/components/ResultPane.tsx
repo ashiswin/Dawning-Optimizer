@@ -22,7 +22,7 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
     setLoading(false); 
   }, [cookieResult]);
 
-  const getResultTable = (quantities: Quantity[]) => {
+  const getResultTable = (quantities: Quantity[], total: number) => {
     const rows = quantities.map((quantity) => {
       const name = Object.keys(quantity)[0];
       return (
@@ -47,6 +47,10 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
         </Table.Header>
         <Table.Body>
           {rows}
+          <Table.Row>
+            <Table.Cell colSpan={2}><strong>Total:</strong></Table.Cell>
+            <Table.Cell>{total}</Table.Cell>
+          </Table.Row>
         </Table.Body>
       </Table>
     );
@@ -63,7 +67,7 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
             {
               result.nomasterwork.total === 0
                 ? <p>You don't have enough ingredients to bake any cookies.</p>
-                : getResultTable(result.nomasterwork.items)
+                : getResultTable(result.nomasterwork.items, result.nomasterwork.total)
             }
           </Tab.Pane> 
         : null,
@@ -78,7 +82,7 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
             {
               result.masterwork.total === 0
               ? <p>You don't have enough ingredients to bake any cookies.</p>
-              : getResultTable(result.masterwork.items)
+              : getResultTable(result.masterwork.items, result.masterwork.total)
             }
           </Tab.Pane> 
         : null,

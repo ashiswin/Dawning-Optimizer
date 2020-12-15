@@ -18,7 +18,7 @@ export interface CookieResult {
 }
 
 function App() {
-  const [quantities, setQuantities] = useState<Quantity>({});
+  const [quantities, setQuantities] = useState<Quantity>(JSON.parse(localStorage.getItem("quantityState") ?? "{}"));
   const [cookieResult, setCookieResult] = useState<CookieResult>();
   const [errorIngredients, setErrorIngredients] = useState<Set<string>>();
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,6 +28,7 @@ function App() {
     let newQuantity: { [index: string]: string } = {};
     newQuantity[name] = quantity;
     setQuantities({ ...quantities, ...newQuantity });
+    localStorage.setItem("quantityState", JSON.stringify({ ...quantities, ...newQuantity }));
   }
 
   const onIngredientErrorHandler = (name: string) => {

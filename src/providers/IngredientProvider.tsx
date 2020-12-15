@@ -109,7 +109,7 @@ export const Ingredients: {[index: string]: Ingredient[]} = {
     {
       name: "Pinch of Light",
       description: "An ingredient that adds a touch of the Traveler's Light to your recipe.",
-      source: "Generating Orbs of Power",
+      source: "Collecting Orbs of Power",
       imageUrl: "https://www.bungie.net/common/destiny2_content/icons/a5da475095401f2da5e74e8f50d78cbe.jpg",
     },
     {

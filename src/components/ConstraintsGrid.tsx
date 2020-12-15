@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, Container, Header, Segment, Button } from 'semantic-ui-react';
+import { Cookies } from '../providers/CookieProvider';
 import ConstraintCell from './ConstraintCell';
 
 
@@ -16,7 +17,29 @@ interface Props {
 }
 
 const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) => {
-  const [constraints, setConstraints] = useState<Constraint[]>(JSON.parse(localStorage.getItem("constraints") ?? "[]"));
+  const getSunsetConstraints = () => {
+    let newConstraints = [];
+    for (const [ name, cookie ] of Object.entries(Cookies)) {
+      if (!cookie.sunset) {
+        continue;
+      }
+      const constraint = {
+        name: name,
+        equality: "eq",
+        value: "0",
+      };
+      newConstraints.push(constraint);
+    }
+    return newConstraints;
+  }
+
+  const storedConstraints = localStorage.getItem("constraints");
+  const [constraints, setConstraints] = useState<Constraint[]>(
+    storedConstraints !== null
+      ? JSON.parse(localStorage.getItem("constraints") ?? "[]")
+      : getSunsetConstraints()
+  );
+
   const onDeleteHandler = (index: number) => {
     let newConstraints = [...constraints];
     newConstraints.splice(index, 1);
@@ -34,6 +57,18 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
     setConstraints(newConstraints);
     onChange(newConstraints);
   }
+  const onSunsetRemoveClickHandler = () => {
+    let newConstraints = [...constraints];
+    
+    const sunsetConstraints = getSunsetConstraints();
+    sunsetConstraints.forEach((constraint) => {
+      if (constraints.indexOf(constraint) === -1) {
+        newConstraints.push(constraint);
+      }
+    })
+    
+    setConstraints(newConstraints);
+  }
 
   const rows = constraints.map((constraint, index) =>
     <ConstraintCell
@@ -46,7 +81,14 @@ const ConstraintsGrid: React.FC<Props> = ({ onChange, onError, onClearError }) =
 
   return (
     <Container fluid style={{ marginBottom: 16 }}>
-      <Header>Constraints</Header>
+      <Grid columns="two" verticalAlign="middle">
+        <Grid.Column>
+          <Header>Constraints</Header>
+        </Grid.Column>
+        <Grid.Column floated="right">
+          <Button content='Ignore Sunset Cookies' primary floated="right" icon="ban" onClick={onSunsetRemoveClickHandler} />
+        </Grid.Column>
+      </Grid>
       <Segment style={{ backgroundColor: "#373737", borderRadius: 0, border: "#FFFFFFF solid 0.5px" }}>
         <Grid.Column>
           {rows}

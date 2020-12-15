@@ -28,21 +28,27 @@ const IngredientCell: React.FC<Props> = ({ ingredient, onChange, onError, onClea
           <p style={{marginTop: -8}}>{ingredient.description}</p>
         </Grid.Column>
         <Grid.Column width={4}>
-          <Input placeholder='0' type="number" error={error} onChange={(event, data) => {
-            if (parseInt(data.value) < 0) {
-              setError(true);
-              if (onError !== undefined) {
-                onError(ingredient.name);
+          <Input 
+            fluid
+            placeholder='0' 
+            type="number" error={error} 
+            defaultValue={localStorage.getItem(ingredient.name)} 
+            onChange={(event, data) => {
+              if (parseInt(data.value) < 0) {
+                setError(true);
+                if (onError !== undefined) {
+                  onError(ingredient.name);
+                }
+                onChange(ingredient.name, "0")
+              } else {
+                setError(false);
+                if (onClearError !== undefined) {
+                  onClearError(ingredient.name);
+                }
+                localStorage.setItem(ingredient.name, data.value)
+                onChange(ingredient.name, data.value);
               }
-              onChange(ingredient.name, "0")
-            } else {
-              setError(false);
-              if (onClearError !== undefined) {
-                onClearError(ingredient.name);
-              }
-              onChange(ingredient.name, data.value);
-            }
-          }} fluid />
+            }} />
         </Grid.Column>
       </Grid>
     </Segment>

@@ -38,7 +38,7 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
     });
 
     return (
-      <Table celled style={{borderRadius: 0, backgroundColor: "#545454", color: "white"}}>
+      <Table celled unstackable style={{borderRadius: 0, backgroundColor: "#545454", color: "white"}}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell style={styles.tableHeader} colSpan={2}>Cookie</Table.HeaderCell>

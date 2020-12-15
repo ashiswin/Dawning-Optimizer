@@ -105,6 +105,9 @@ function App() {
         <p style={{ fontSize: "16px" }}>
           This year, we have added the ability to add constraints to the cookie calculation. If you wish to set a minimum/maximum number of a specific cookie, simply add a constraint for that cookie!
         </p>
+        <p style={{ fontSize: "16px" }}>
+          E.g. If a bounty requires 10 Vanilla Blades, you can <strong>Add a Constraint</strong> for Vanilla Blades &gt;= 10, which will ensure that you'll get at least 10 Vanilla Blades.
+        </p>
       </div>
       {
         errorVisible

@@ -30,13 +30,9 @@ const ResultPane: React.FC<Props> = ({cookieResult, onBakeItClick}) => {
         <Table.Row>
           <Table.Cell><Image src={cookie.imageUrl} size="tiny" /></Table.Cell>
           <Table.Cell>
-            <Header>{name.trim()} {cookie.sunset ? "(Sunset)" : ""}</Header>
+            <Header>{name.trim()}</Header>
             <p>{cookie.description}</p>
-            {
-              cookie.sunset
-                ? <p style={{color: "red"}}>This cookie is for a vendor from vaulted content.</p>
-                : null
-            }
+            <p><strong>Ingredients: </strong>{cookie.recipe}</p>
           </Table.Cell>
           <Table.Cell>{quantity[name]}</Table.Cell>
         </Table.Row>

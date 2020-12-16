@@ -14,7 +14,7 @@ interface Props {
 
 const ConstraintCell: React.FC<Props> = ({constraint, index, onChange, onDelete, onError, onClearError}) => {
   const [error, setError] = useState(false);
-  const cookieOptions = Object.keys(Cookies).map((value) => {return {key: value, value: value, text: `${value}${Cookies[value].sunset ? " (Sunset)" : ""}`}});
+  const cookieOptions = Object.keys(Cookies).map((value) => {return {key: value, value: value, text: `${value}`}});
   const equalityOptions = [
     {key: "lte", value: "lte", text: "<="},
     {key: "eq", value: "eq", text: "="},

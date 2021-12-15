@@ -6,6 +6,12 @@ export interface Cookie {
 }
 
 export const Cookies: {[index: string]: Cookie} = {
+  "Ascendant Apple Tart": {
+    name: "Ascendant Apple Tart",
+    description: "Deliver this exquisite delight to Queen Mara Sov in her chambers via the H.E.L.M.",
+    imageUrl: "https://www.bungie.net/common/destiny2_content/icons/bd5edc0ef99acd2c6da6af788f59e33c.jpg",
+    recipe: "Taken Butter, Sharp Flavor",
+  },
   "Ascendant Oatmeal Raisin Cookies": {
     name: "Ascendant Oatmeal Raisin Cookies",
     description: "Deliver these delicious and nostalgic treats to Eris Morn on the Moon.",
@@ -14,7 +20,7 @@ export const Cookies: {[index: string]: Cookie} = {
   },
   "Bittersweet Biscotti": {
     name: "Bittersweet Biscotti",
-    description: "Deliver this thoughtful treat to Crow in the Tangled Shore.",
+    description: "Deliver this thoughtful treat to Crow in the H.E.L.M. or the Tangled Shore.",
     imageUrl: "https://www.bungie.net/common/destiny2_content/icons/510a4671d21565baa1c1b18f0f10f291.jpg",
     recipe: "Dark Ether Cane, Balanced Flavors",
   },
@@ -50,13 +56,13 @@ export const Cookies: {[index: string]: Cookie} = {
   },
   "Dark Chocolate Motes": {
     name: "Dark Chocolate Motes",
-    description: "Deliver these tempting morsels to the Drifter in the Annex.",
+    description: "Deliver these tempting morsels to the Drifter in the Tower Annex.",
     imageUrl: "https://www.bungie.net/common/destiny2_content/icons/8a712271f7de627e4cf38eb392e8f6f9.jpg",
     recipe: "Taken Butter, Null Taste",
   },
   "Eliksni Birdseed": {
     name: "Eliksni Birdseed",
-    description: "Deliver this high-end falcon food to Hawthorne's falcon Louis in the Tower Bazaar.",
+    description: "Deliver this high-end falcon food to Hawthorne's falcon, Louis, in the Tower Bazaar.",
     imageUrl: "https://www.bungie.net/common/destiny2_content/icons/98f8ff6b26899071de1b2b6c1fc819b0.jpg",
     recipe: "Ether Cane, Personal Touch",
   },
@@ -77,6 +83,12 @@ export const Cookies: {[index: string]: Cookie} = {
     description: "Deliver these explosively delicious treats to Commander Zavala in the Tower Courtyard.",
     imageUrl: "https://www.bungie.net/common/destiny2_content/icons/bb0069e9efc9698f366d63fdce0c6db7.jpg",
     recipe: "Ether Cane, Delicious Explosion",
+  },
+  "Hot Crossfire Buns": {
+    name: "Hot Crossfire Buns",
+    description: "Deliver this impeccably crafted treat to Ada-1 in the Tower Annex.",
+    imageUrl: "https://www.bungie.net/common/destiny2_content/icons/ff9810abba7b40868b013eb944fa5756.jpg",
+    recipe: "Ether Cane, Balanced Flavors",
   },
   "Ill-Fortune Cookies": {
     name: "Ill-Fortune Cookies",
@@ -101,6 +113,12 @@ export const Cookies: {[index: string]: Cookie} = {
     description: "Deliver these treats, whose will is clearly not their own, to Xûr wherever the Nine have wished him to be.",
     imageUrl: "https://www.bungie.net/common/destiny2_content/icons/72cc666b334a39996f74b09a4850e773.jpg",
     recipe: "Taken Butter, Electric Flavor",
+  },
+  "Starwort Thins": {
+    name: "Starwort Thins",
+    description: "Deliver this timeless classic to the Exo Stranger on Europa.",
+    imageUrl: "https://www.bungie.net/common/destiny2_content/icons/10e6e4678c665776a1bc18417de365f6.jpg",
+    recipe: "Dark Ether Cane, Dark Frosting",
   },
   "Telemetry Tapioca": {
     name: "Telemetry Tapioca",

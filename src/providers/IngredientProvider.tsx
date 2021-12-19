@@ -124,6 +124,12 @@ export const Ingredients: {[index: string]: Ingredient[]} = {
       source: "Super kills",
       imageUrl: "https://www.bungie.net/common/destiny2_content/icons/7da5c69667c72928f1c452bbdb871d52.jpg",
     },
+    {
+      name: "Dark Frosting",
+      description: "An ingredient that adds a decadently deep, rich flavor.",
+      source: "Defeating targets with Stasis damage",
+      imageUrl: "https://www.bungie.net/common/destiny2_content/icons/5a25fb6a8dde8514da3258969d926bb0.jpg",
+    }
   ],
   "essence": [
     {

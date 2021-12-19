@@ -104,7 +104,7 @@ export const Cookies: {[index: string]: Cookie} = {
   },
   "Starwort Thins": {
     name: "Starwort Thins",
-    description: "https://www.bungie.net/common/destiny2_content/icons/10e6e4678c665776a1bc18417de365f6.jpg",
+    description: "Deliver this timeless classic to the Exo Stranger on Europa.",
     imageUrl: "https://www.bungie.net/common/destiny2_content/icons/10e6e4678c665776a1bc18417de365f6.jpg",
     recipe: "Dark Ether Cane, Dark Frosting",
   },

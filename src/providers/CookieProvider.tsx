@@ -6,6 +6,12 @@ export interface Cookie {
 }
 
 export const Cookies: {[index: string]: Cookie} = {
+  "Ascendant Apple Tart": {
+    name: "Ascendant Apple Tart",
+    description: "Deliver this exquisite delight to Queen Mara Sov in her chambers via the H.E.L.M.",
+    imageUrl: "https://www.bungie.net/common/destiny2_content/icons/bd5edc0ef99acd2c6da6af788f59e33c.jpg",
+    recipe: "Taken Butter, Sharp Flavor",
+  },
   "Ascendant Oatmeal Raisin Cookies": {
     name: "Ascendant Oatmeal Raisin Cookies",
     description: "Deliver these delicious and nostalgic treats to Eris Morn on the Moon.",
@@ -96,6 +102,12 @@ export const Cookies: {[index: string]: Cookie} = {
     imageUrl: "https://www.bungie.net/common/destiny2_content/icons/1cece8791684e7142627c7f2fa2da0dd.jpg",
     recipe: "Vex Milk, Personal Touch",
   },
+  "Starwort Thins": {
+    name: "Starwort Thins",
+    description: "https://www.bungie.net/common/destiny2_content/icons/10e6e4678c665776a1bc18417de365f6.jpg",
+    imageUrl: "https://www.bungie.net/common/destiny2_content/icons/10e6e4678c665776a1bc18417de365f6.jpg",
+    recipe: "Dark Ether Cane, Dark Frosting",
+  },
   "Strange Cookies": {
     name: "Strange Cookies",
     description: "Deliver these treats, whose will is clearly not their own, to Xûr wherever the Nine have wished him to be.",
@@ -107,12 +119,6 @@ export const Cookies: {[index: string]: Cookie} = {
     description: "Deliver this dismantling delight to Banshee-44 in the Tower Courtyard.",
     imageUrl: "https://www.bungie.net/common/destiny2_content/icons/85bc7a8c18b58e6286fec57dc28ce077.jpg",
     recipe: "Vex Milk, Bullet Spray",
-  },
-  "Thousand-Layer Cookie": {
-    name: "Thousand-Layer Cookie",
-    description: "Deliver this enticing, crafty treat to Riven in the Dreaming City.",
-    imageUrl: "https://www.bungie.net/common/destiny2_content/icons/a7bc9d420b9afdfb3397f825a1d76185.jpg",
-    recipe: "Taken Butter, Delicious Explosion",
   },
   "Traveler Donut Holes": {
     name: "Traveler Donut Holes",
